@@ -1,0 +1,51 @@
+{% extends 'base.html' %} {% block head %}
+<title>Movie Review App</title>
+<link rel="stylesheet" type="text/css" href="../static/css/index.css" />
+
+{% endblock %} {% block body %}
+<header>
+  <div class="wallpaper">
+    <!-- Wallpaper content goes here -->
+  </div>
+
+<!-- Navbar starts here -->
+  <div class="navbar">
+    <a href="/" class="{% if active=='home' %}active{%endif %}">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn">Categories</button>
+      <div class="dropdown-content">
+        {% for category in categories %}
+        <a href="/?type={{ category[1] }}">{{ category[1] }}</a>
+      {% endfor %}
+      </div>
+    </div>
+    <a href="/watch-list" class="{% if active=='watch-list' %}active{%endif %}">Watchlist</a>
+    <a class="{% if active=='latest' %}active{%endif %}" href="/?latest=true">Latest</a>
+    <div class="welcome-dropdown">
+      {% if session['logged_in'] %}
+      <span id="id-user" style="display: none;">{{session['id'] }}</span>
+      <button class="dropbtn" id="user-name">Welcome, <span id="welcome-message"> {{session['username'] }} </span></button>
+      <div class="dropdown-content">
+        <a href="/logout">Log Out</a>
+        {% else %}
+        <button class="dropbtn">Welcome, Guest</button>
+        <div class="dropdown-content">
+          <a href="/login">Login</a>
+          <a href="/register">Sign up</a>
+          {% endif %}
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Navbar starts here -->
+
+<!-- Watch-list starts here -->
+<div class="movie-list">
+  <h2 id="movies-to-watch">Movies to Watch</h2>
+  <ul id="movie-list"></ul>
+</div>
+<!-- Watch-list ends here -->
+
+
+<script src="../static/scripts/watch-list.js"></script>
+{% endblock %}

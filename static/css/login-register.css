@@ -1,0 +1,130 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  background-color: hsla(11, 80%, 18%, 0.967);
+}
+
+#triangle-topleft {
+  width: 100%;
+  margin: 0;
+  width: 0;
+  height: 0;
+  border-top: 680px solid rgba(255, 255, 255, 0);
+  border-left: 100vw solid transparent;
+
+  top: 0;
+  left: 0;
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  background: url("../images/ww.jpg");
+}
+
+#container {
+  position: absolute;
+}
+
+.logo {
+  position: absolute;
+  bottom: 40px;
+  left: 20px;
+  width: 500px;
+  height: 500px;
+  background: url("../images/logo1.png") no-repeat center center;
+  background-size: contain;
+  border-radius: 50%;
+}
+
+.login-container,
+.register-container {
+  border-radius: 5%;
+  position: absolute;
+  margin-left: auto;
+  margin-right: 40%;
+  left: 0;
+  right: 0;
+  top: 25%;
+  padding: 60px;
+  width: 250px;
+  height: 280px;
+  background-color: rgba(110, 58, 26, 0);
+  text-align: center;
+  box-shadow: 20px 20px 30px rgba(255, 170, 0, 0.1);
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: rgb(75, 3, 3);
+  display: block !important;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+input {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  margin-left: 10px;
+  width: 70%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #680202;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+a {
+  text-decoration: none;
+  color: #d0a38e;
+}
+#message {
+  position: fixed;
+  width: 80%;
+  bottom: 5%;
+  display: block;
+  font: italic small-caps bold 24px Georgia, serif;
+  background-color: rgba(32, 28, 28, 0.819);
+  color: orange;
+  height: 7px;
+  line-height: 7px;
+  text-align: center;
+  padding: 20px;
+  height: 10px;
+  border-radius: 30px;
+  left: 8%;
+}
+
+@media (max-width: 600px) {
+  .login-container,
+  .register-container {
+    top: 30%;
+    padding: 50px;
+    width: 30%;
+  }
+  h1 {
+    color: white;
+  }
+
+  .logo {
+    width: 300px;
+    height: 300px;
+    bottom: auto;
+    top: auto;
+    margin-bottom: 20px;
+    left: 20px;
+    right: auto;
+    transform: translateX(0);
+  }
+}

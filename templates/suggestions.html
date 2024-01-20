@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="../static/css/suggestions.css" rel="stylesheet" />
+  </head>
+  <body>
+    <a href="/"> Return to Home page</a>
+    <div class="add">
+      <form action="/suggest-add" method="GET">
+        <input
+          type="text"
+          placeholder="Type full movie name"
+          name="suggested"
+          required
+        />
+        <button>Add</button>
+      </form>
+    </div>
+    <h2>Previous Suggestions</h2>
+    {% for movie in movies %}
+    <li>{{movie}}</li>
+    {% endfor %} {% with message = get_flashed_messages() %} {% if message %}
+    <div id="message">{{ message[0] }}</div>
+    {% endif %} {% endwith %}
+    <script src="../static/scripts/flash-message.js"></script>
+  </body>
+</html>

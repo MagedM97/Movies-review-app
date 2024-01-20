@@ -1,0 +1,91 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-image: url("../images/bat.jpg");
+  background-color: rgba(255, 255, 255, 0.1);
+  background-blend-mode: lighten;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/*style for the search bar */
+
+.add {
+  text-align: center;
+  margin-top: 5%;
+}
+
+.add input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.612);
+  outline: none;
+}
+
+.add button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: rgb(255, 111, 0);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* CSS for the suggestions list */
+li {
+  text-align: center;
+  color: aliceblue;
+  font-size: 20px;
+  list-style-type: none;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+li:before {
+  content: "🌟";
+  margin-right: 10px;
+}
+h2 {
+  background-color: rgba(85, 55, 55, 0.792);
+  padding: 20px;
+  width: 20%;
+  margin-left: 39%;
+  text-align: center;
+  border-radius: 5px;
+  color: rgb(255, 111, 0);
+}
+
+/* CSS for the flash message */
+#message {
+  position: fixed;
+  width: 80%;
+  bottom: 5%;
+  display: block;
+  font: italic small-caps bold 20px Georgia, serif;
+  background-color: rgb(32, 28, 28);
+  color: orange;
+  height: 7px;
+  line-height: 7px;
+  text-align: center;
+  padding: 20px;
+  height: 10px;
+  border-radius: 30px;
+  left: 8%;
+}
+
+/* CSS for the link of home page */
+a {
+  display: block;
+  text-decoration: none;
+  color: azure;
+  margin: 20px 0px 0px 40px;
+  font-size: 16px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: rgb(23, 21, 21);
+  width: fit-content;
+  padding: 10px;
+  border-radius: 5px;
+  color: rgb(239, 145, 74);
+}

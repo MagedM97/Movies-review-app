@@ -1,0 +1,165 @@
+{% extends 'base.html' %} {% block head %}
+<title>Movie Review App</title>
+<link rel="stylesheet" type="text/css" href="../static/css/index.css" />
+{% endblock %} {% block body %}
+<header>
+  <div class="wallpaper">
+    <!-- Wallpaper content goes here -->
+  </div>
+
+  
+<!-- Navbar starts here -->
+  <div class="navbar">
+    <a href="/" class="{% if active=='home' %}active{%endif %}">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn {% if active=='category' %}active{%endif %}">Categories</button>
+      <div class="dropdown-content">
+        {% for category in categories %}
+        <a class="{% if type==category[1] %}active{%endif %}" href="/?type={{ category[1] }}">{{ category[1] }}</a>
+      {% endfor %}
+        
+      </div>
+    </div>
+    {% if session['logged_in'] %}
+    <a href="/watch-list" class="{% if active=='watch-list' %}active{%endif %}">Watchlist</a>
+    {% endif %}
+    <a class="{% if active=='latest' %}active{%endif %}" href="/?latest=true">Latest</a>
+    <div class="welcome-dropdown">
+      {% if session['logged_in'] %}
+      <button class="dropbtn">Welcome, <span id="welcome-message"> {{session['username'] }} </span></button>
+      <div class="dropdown-content">
+        <a href="/logout">Log Out</a>
+        {% else %}
+        <button class="dropbtn">Welcome, Guest</button>
+        <div class="dropdown-content">
+          <a href="/login">Login</a>
+          <a href="/register">Sign up</a>
+          {% endif %}
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Navbar ends here -->
+
+
+<!-- Add suggestion starts here -->
+{% if session['logged_in'] %}
+<a href="/suggestions" id="suggestions">Suggest a movie to add in The web site</a>
+{% endif %}
+<!-- Add suggestion ends here -->
+
+
+<!-- Search box starts here -->
+<div class="search-bar">
+  <form action="/" method="GET">
+  <input type="text" id="search-name" placeholder="Search by movie name" name="movie-name" />
+  <select id="search-year" name="year">
+    <option value="">Search by year</option>
+    {% for year in range(1970, 2025) %}
+      <option value="{{ year }}">{{ year }}</option>
+    {% endfor %}
+  </select>
+  <button id="search-submit" type="submit">Search</button>
+</form>
+</div>
+<!-- Search box ends here -->
+
+
+<!-- Movies cards starts here -->
+<div class="movie-container">
+  {% for movie in movies %}
+  <div class="movie-card">
+    <img src="../static/images/{{ movie[4]}}" alt="{{movie[1]}}" />
+    <h2>{{movie[1]}}</h2>
+    <p>{{movie[5]}}</p>
+    <div class="rating">
+      {% if movie[6] != none %}
+      {% if movie[6] is defined and movie[6] >= 5 %}
+      <span class="fa fa-star checked"></span>
+      {% else %}
+      <span class="fa fa-star"></span>
+      {% endif %}
+
+      {% if movie[6] is defined and movie[6] >= 4 %}
+      <span class="fa fa-star checked"></span>
+      {% else %}
+      <span class="fa fa-star"></span>
+      {% endif %}
+
+      {% if movie[6] is defined and movie[6] >= 3 %}
+      <span class="fa fa-star checked"></span>
+      {% else %}
+      <span class="fa fa-star"></span>
+      {% endif %}
+
+      {% if movie[6] is defined and movie[6] >= 2 %}
+      <span class="fa fa-star checked"></span>
+      {% else %}
+      <span class="fa fa-star"></span>
+      {% endif %}
+      <span class="fa fa-star checked"></span>
+      {% endif %}
+    </div>
+    {% if session['logged_in'] %}
+    <button id="openPopupButton" onclick="openPopup('{{ movie[0] }}')">Add rate</button>
+
+    <button id="watch-list" onclick="addToWatchList('{{ movie[1] }}','{{session['id']}}')">Add to watch list</button>
+    <button id="openReviewPopupButton" onclick="openReviewPopup('{{ movie[0] }}')">Add review</button>
+    {% endif %}
+    <a href="/reviews?id={{movie[0]}}&movie={{movie[1]}}">View Reviews</a>
+  </div>
+  {% endfor %}
+<!-- Movies cards starts here -->
+
+
+<!-- Rate popup starts here -->
+  <div id="popupContainer" class="popupContainer">
+    <div class="popupContent">
+      <span class="closeButton" onclick="closePopup()">&times;</span>
+      <div class="fieldset">
+        <label>Choose rating</label>
+        <form class="rate-review" method="POST" id="rateform" action="/rate">
+          
+          <input type="radio" id="star5" name="rate" value="5" >
+          <label for="star5" title="5 stars">5 stars</label>
+          <input type="radio" id="star4" name="rate" value="4" >
+          <label for="star4" title="4 stars">4 stars</label>
+          <input type="radio" id="star3" name="rate" value="3" >
+          <label for="star3" title="3 stars">3 stars</label>
+          <input type="radio" id="star2" name="rate" value="2" >
+          <label for="star2" title="2 stars">2 stars</label>
+          <input type="radio" id="star1" name="rate" value="1" >
+          <label for="star1" title="1 star">1 star</label>
+        </form>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- Rate popup ends here -->
+
+
+<!-- Review popup starts here -->
+<div id="reviewPopupContainer" class="popupContainer">
+  <div class="popupContent">
+    <span class="closeButton" onclick="closeReviewPopup()">&times;</span>
+    <div class="fieldset">
+      <label>Add your review</label>
+      <form method="POST" id="reviewform" class="rate-review" action="/review">
+        <textarea id="reviewText" name="review" rows="4" cols="50"></textarea>
+        <button type="submit" id="add-review">Add</button>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Review popup ends here -->
+
+
+<!-- Flash message starts here -->
+{% with message = get_flashed_messages() %} {% if message %}
+<div id="message">{{ message[0] }}</div>
+{% endif %} {% endwith %}
+<!-- Flash message ends here -->
+
+<script src="../static/scripts/index.js"></script>
+<script src="../static/scripts/flash-message.js"></script>
+{% endblock %}

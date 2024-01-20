@@ -1,0 +1,467 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, rgb(150, 0, 0), #000000);
+}
+
+header {
+  position: relative;
+}
+.wallpaper {
+  width: 100%;
+  height: 300px;
+  background-image: url("../images/wallpaperflare.com_wallpaper.jpg");
+  background-size: contain;
+  background-position: center;
+}
+
+/* CSS for the navbar */
+.navbar {
+  background-color: #333;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.navbar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 18px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+  border-radius: 5px;
+}
+.navbar a.active,
+button.active {
+  background-color: #ffd001 !important;
+  color: rgb(166, 2, 2);
+  border-radius: 5px;
+}
+.navbar a:hover,
+.dropdown:hover .dropbtn {
+  background-color: #ddd;
+  color: black;
+  border-radius: 5px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 5px;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.welcome-dropdown {
+  float: right;
+  overflow: hidden;
+}
+
+.welcome-dropdown .dropbtn {
+  font-size: 17px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.welcome-dropdown:hover .dropbtn {
+  background-color: #ddd;
+  color: black;
+  border-radius: 5px;
+}
+
+.welcome-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  right: 0;
+}
+
+.welcome-dropdown:hover .dropdown-content {
+  display: block;
+}
+/* CSS for the suggestions link */
+#suggestions {
+  display: block;
+  width: 20%;
+  background-color: #555;
+  margin: 10px;
+  padding: 8px;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+}
+#suggestions:hover {
+  background-color: #d89066;
+}
+
+/* CSS for the search-bar */
+.search-bar {
+  text-align: center;
+  margin: 20px 0px;
+  align-content: center;
+}
+
+#search-name,
+#search-year,
+#search-submit {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.612);
+  outline: none;
+  background-color: #5555556f;
+  border: 2px solid rgba(255, 217, 0, 0.227);
+  color: white;
+}
+
+#search-year option {
+  padding: 3px;
+  text-align: center;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  color: black;
+  background-color: #5e5c53;
+}
+
+/* CSS for the movies cards */
+.movie-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.movie-card {
+  width: 300px;
+  margin: 10px;
+  padding: 20px;
+  background-color: #f8f8f8;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border-radius: 5px;
+}
+
+.movie-card img {
+  border-radius: 2%;
+  width: 300px;
+  height: 300px;
+  margin-bottom: 10px;
+}
+
+.movie-card h2 {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serifs;
+  margin-bottom: 10px;
+}
+
+.movie-card p {
+  margin-bottom: 20px;
+  color: #5c1919;
+}
+
+.movie-card a,
+#watch-list,
+#openPopupButton,
+#openReviewPopupButton {
+  width: 138px;
+  display: inline-block;
+  padding: 6px;
+  background-color: #2c2b2b;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  margin: 2px;
+}
+
+.movie-card a:hover,
+#watch-list:active {
+  background-color: #87731d;
+}
+
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.fa {
+  font-size: 20px;
+  color: #3e3c3b;
+}
+
+.checked {
+  color: #ffd700;
+}
+
+.movie-list {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.movie-list h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.movie-item {
+  list-style: none;
+  background-color: #f4f4f4;
+  padding: 20px 40px;
+  margin: auto;
+  display: block;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+  color: #333;
+  transition: transform 0.3s ease;
+  width: 25%;
+  text-align: center;
+}
+/* CSS for watch-list */
+.movie-item:hover {
+  transform: scale(1.05);
+}
+.delete-btn {
+  background-color: #fd6c53;
+  color: #fff;
+  border: none;
+  float: right;
+  padding-top: 7px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #d1482e;
+}
+/* CSS for popup */
+.popupContainer {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.popupContent {
+  background-color: #f9f9f9;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  max-width: 400px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.closeButton {
+  color: #aaa;
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.closeButton:hover,
+.closeButton:focus {
+  color: #555;
+}
+
+.fieldset {
+  margin-bottom: 20px;
+}
+
+.fieldset label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.rate-review {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.rate-review > label {
+  margin-bottom: 0;
+  margin-top: 4px;
+  height: 30px;
+}
+
+.rate-review:not(:checked) > input {
+  position: absolute;
+  top: -9999px;
+}
+
+.rate-review:not(:checked) > label {
+  float: right;
+  width: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 30px;
+  color: #ddd;
+  transition: color 0.3s ease;
+}
+
+.rate-review:not(:checked) > label::before {
+  content: "★ ";
+  position: relative;
+  top: -5px;
+  left: 2px;
+}
+
+.rate-review > input:checked ~ label {
+  color: #ffc700;
+}
+
+.rate-review > input:checked:focus + label,
+.rate-review > input:focus + label {
+  outline: none;
+}
+
+.rate-review:not(:checked) > label:hover,
+.rate-review:not(:checked) > label:hover ~ label {
+  color: #deb217;
+}
+
+.rate-review > input:checked + label:hover,
+.rate-review > input:checked + label:hover ~ label,
+.rate-review > input:checked ~ label:hover,
+.rate-review > input:checked ~ label:hover ~ label,
+.rate-review > label:hover ~ input:checked ~ label {
+  color: #c59b08;
+}
+
+/* CSS for the flash message */
+#message {
+  position: fixed;
+  width: 80%;
+  bottom: 5%;
+  display: block;
+  font: italic small-caps bold 20px Georgia, serif;
+  background-color: rgb(32, 28, 28);
+  color: orange;
+  height: 7px;
+  line-height: 7px;
+  text-align: center;
+  padding: 20px;
+  height: 10px;
+  border-radius: 30px;
+  left: 8%;
+}
+
+/* CSS for reviews page */
+#add-review {
+  background-color: #555;
+  color: white;
+  border-radius: 2px;
+  padding: 4px;
+}
+
+.movie-list {
+  background-color: #ea4848;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 20px;
+}
+.movie-list h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: gold;
+}
+.movie-list ul {
+  list-style: none;
+  padding: 0;
+}
+.movie-list li {
+  overflow: auto;
+  margin: auto;
+  font-size: 18px;
+  margin-bottom: 12px;
+  background-color: #623e3e;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+}
+.movie-list li:before {
+  content: "🌟";
+  margin-right: 10px;
+}
+
+#user-review,
+#welcome-message {
+  color: gold;
+  font-size: 18px;
+  text-transform: capitalize;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+#by {
+  color: #000000;
+}

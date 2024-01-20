@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block head %}
+<title>Log in</title>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="../static/css/login-register.css"
+/>
+{% endblock %} {% block body %}
+<div id="container">
+  <div id="triangle-topleft"></div>
+</div>
+<div class="logo"></div>
+<div class="login-container">
+  <h1>Login</h1>
+  <form method="POST">
+    <input type="email" placeholder="E-mail" required name="email" />
+    <input type="password" placeholder="Password" required name="password" />
+    <button type="submit">Login</button>
+  </form>
+  <p>Don't have an account? <a href="/register">Register here</a></p>
+</div>
+{% with message = get_flashed_messages() %} {% if message %}
+<div id="message">{{ message[0] }}</div>
+{% endif %} {% endwith %}
+<script src="../static/scripts/flash-message.js"></script>
+{% endblock %}
