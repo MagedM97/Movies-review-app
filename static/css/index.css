@@ -465,3 +465,17 @@ button.active {
 #by {
   color: #000000;
 }
+
+/* CSS for pagination */
+.pagination {
+  color: white;
+  text-align: center;
+  margin: 12px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.pagination a {
+  text-decoration: none;
+  color: #c59b08;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}

@@ -1,4 +1,5 @@
 from flask import Flask, render_template, url_for, request, redirect, flash, session
+import math
 from flask_mysqldb import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -61,6 +62,10 @@ def index():
     date = request.args.get('latest')  
     year = request.args.get("year")  
     name = request.args.get("movie-name")  
+    page = request.args.get('page',1 ,type=int)
+    per_page = 8
+    start = (page - 1)*per_page
+    end = start + per_page
 
     # Retrieving movies according to query params
     if category:
@@ -92,14 +97,15 @@ def index():
     cur.execute("SELECT * FROM categories")
     categories = cur.fetchall()
     cur.close()
-
+    total_pages = math.ceil((len(movies) / per_page))
+    movies_on_page = movies[start:end]
     # Add active class to the navigation based on the query parameters
     if category:
         return render_template("index.html", movies=movies, categories=categories, active='category', type=category)
     elif date:
         return render_template("index.html", movies=movies, categories=categories, active='latest')
     else:
-        return render_template("index.html", movies=movies, categories=categories, active='home')
+        return render_template("index.html", movies=movies_on_page, categories=categories, active='home',total_pages=total_pages,page=page)
 
 
 # Route for the login page
@@ -235,7 +241,6 @@ def review():
 def reviews():
     id = request.args.get("id")
     movie = request.args.get("movie")
-    print(request.args)
     cur = mysql.connection.cursor()
     cur.execute("SELECT review_text,user_id, users.username FROM reviews JOIN users on reviews.user_id = users.id WHERE reviews.movie_id = %s ",(id,))
     reviews = cur.fetchall()

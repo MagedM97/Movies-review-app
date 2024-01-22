@@ -109,7 +109,7 @@
     <a href="/reviews?id={{movie[0]}}&movie={{movie[1]}}">View Reviews</a>
   </div>
   {% endfor %}
-<!-- Movies cards starts here -->
+<!-- Movies cards ends here -->
 
 
 <!-- Rate popup starts here -->
@@ -153,6 +153,18 @@
 </div>
 <!-- Review popup ends here -->
 
+
+<!-- Pagination starts here -->
+<div class="pagination">
+  {% if page > 1 %}
+  <a href="{{ url_for('index',page=page-1)}}">Previous</a>
+  {% endif %}
+  <spn>Page {{page}} of {{total_pages}}</spn>
+  {% if page < total_pages %}
+  <a href="{{ url_for('index',page=page+1)}}">Next</a>
+  {% endif %}
+</div>
+<!-- Pagination ends here -->
 
 <!-- Flash message starts here -->
 {% with message = get_flashed_messages() %} {% if message %}
