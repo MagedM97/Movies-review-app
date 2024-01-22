@@ -40,7 +40,7 @@ pip3 install Werkzeug
    ```
 
 4. Import the pre-exported database file into the movies database you just created.
-5. Open the server.py file in your project and locate the following section:
+5. Open the database.py file in your project and locate the following section:
 
 ```python
 app.config['MYSQL_HOST'] = 'localhost'
