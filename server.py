@@ -101,9 +101,9 @@ def index():
     movies_on_page = movies[start:end]
     # Add active class to the navigation based on the query parameters
     if category:
-        return render_template("index.html", movies=movies, categories=categories, active='category', type=category)
+        return render_template("index.html", movies=movies, categories=categories, active='category', type=category,total_pages=total_pages,page=page)
     elif date:
-        return render_template("index.html", movies=movies, categories=categories, active='latest')
+        return render_template("index.html", movies=movies, categories=categories, active='latest',total_pages=total_pages,page=page)
     else:
         return render_template("index.html", movies=movies_on_page, categories=categories, active='home',total_pages=total_pages,page=page)
 

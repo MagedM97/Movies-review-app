@@ -130,17 +130,18 @@ button.active {
 /* CSS for the suggestions link */
 #suggestions {
   display: block;
-  width: 20%;
-  background-color: #555;
+  width: fit-content;
+  background-color: #0e0e0e;
   margin: 10px;
   padding: 8px;
-  color: white;
+  color: #c59b08;
   text-decoration: none;
   border-radius: 5px;
   text-align: center;
 }
 #suggestions:hover {
-  background-color: #d89066;
+  background-color: #c59b08;
+  color: #000000;
 }
 
 /* CSS for the search-bar */
@@ -478,4 +479,15 @@ button.active {
   text-decoration: none;
   color: #c59b08;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+/* Ask app to login message */
+.ask-to-login {
+  color: #c59b08;
+  margin: 10px;
+  font-family: monospace;
+  font-size: 14px;
+  background-color: #270909;
+  width: fit-content;
+  padding: 5px;
+  border-radius: 5px;
 }

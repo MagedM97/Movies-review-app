@@ -44,9 +44,15 @@
 
 <!-- Add suggestion starts here -->
 {% if session['logged_in'] %}
-<a href="/suggestions" id="suggestions">Suggest a movie to add in The web site</a>
+<a href="/suggestions" id="suggestions">Suggest a movie to be added to the website</a>
 {% endif %}
 <!-- Add suggestion ends here -->
+
+
+<!-- Ask user to login to use all app's featues -->
+{% if not session['logged_in'] %}
+<div class="ask-to-login">Please log in or register to access all app features, including adding ratings, reviews, movies to your watch list, and suggesting movies to be added to the website.</div>
+{% endif %}
 
 
 <!-- Search box starts here -->
