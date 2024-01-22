@@ -1,55 +1,14 @@
-from flask import Flask, render_template, url_for, request, redirect, flash, session
+from flask import Flask
+from database import configure_database,mysql
+from flask import render_template, url_for, request, redirect, flash, session
+from logic import append_suggestion,get_suggestions
+from models.user import User
+from werkzeug.security import generate_password_hash
 import math
-from flask_mysqldb import MySQL
-from werkzeug.security import generate_password_hash, check_password_hash
-
-# User class for handling user authentication
-class User:
-    def __init__(self, id, username, email):
-        self.id = id
-        self.username = username
-        self.email = email
-
-    @staticmethod
-    def find_by_email_and_password(email, password):
-        cur = mysql.connection.cursor()
-        cur.execute("SELECT * FROM users WHERE email = %s", (email,))
-        user_data = cur.fetchone()
-        cur.close()
-
-        if user_data and check_password_hash(user_data[3], password):
-            return User(user_data[0], user_data[1], user_data[2])
-        else:
-            return None
-
-# Function to get suggestions from a file
-def get_suggestions():
-    suggestions = open("./static/data/suggestions.txt")
-    content = suggestions.read()
-    suggestions.close()
-    all_suggestions = content.split("\n") 
-    all_suggestions.pop()
-    return all_suggestions
-
-# Function to append a suggestion to the file
-def append_suggestion(suggestion):
-    suggestions = open("./static/data/suggestions.txt","a")
-    suggestions.write(suggestion+"\n")
-    suggestions.close()
-
 app = Flask(__name__)
 
-
-
-
-app.config['MYSQL_HOST'] = 'localhost'  
-app.config['MYSQL_USER'] = 'root'  
-app.config['MYSQL_PASSWORD'] = ''  
-app.config['MYSQL_DB'] = 'movies'  
-
-app.config['SECRET_KEY'] = 'your-secret-key'  
-
-mysql = MySQL(app)
+app.config['SECRET_KEY'] = 'your-secret-key' 
+configure_database(app)
 
 
 # Route for the home page
@@ -106,6 +65,7 @@ def index():
         return render_template("index.html", movies=movies, categories=categories, active='latest',total_pages=total_pages,page=page)
     else:
         return render_template("index.html", movies=movies_on_page, categories=categories, active='home',total_pages=total_pages,page=page)
+
 
 
 # Route for the login page
@@ -277,4 +237,6 @@ def suggestions_search():
         flash("Your suggestion added successfully, Thank you ")
         return redirect(request.referrer)
     
+
+
 

@@ -482,12 +482,13 @@ button.active {
 }
 /* Ask app to login message */
 .ask-to-login {
-  color: #c59b08;
+  color: gold;
   margin: 10px;
   font-family: monospace;
-  font-size: 14px;
+  font-size: 16px;
   background-color: #270909;
   width: fit-content;
-  padding: 5px;
+  padding: 8px;
   border-radius: 5px;
+  font-style: italic;
 }
