@@ -20,7 +20,9 @@ def index():
     category = request.args.get('type')  
     date = request.args.get('latest')  
     year = request.args.get("year")  
-    name = request.args.get("movie-name")  
+    name = request.args.get("movie-name") 
+
+    # Pagination information 
     page = request.args.get('page',1 ,type=int)
     per_page = 8
     start = (page - 1)*per_page
@@ -56,7 +58,10 @@ def index():
     cur.execute("SELECT * FROM categories")
     categories = cur.fetchall()
     cur.close()
+
+    # Get total pages depending on number of movies
     total_pages = math.ceil((len(movies) / per_page))
+    # Specify movies for page
     movies_on_page = movies[start:end]
     # Add active class to the navigation based on the query parameters
     if category:
