@@ -43,11 +43,16 @@
 
 
 <!-- Add suggestion starts here -->
-{% if session['logged_in'] %}
+{% if session['logged_in'] and not session['admin'] %}
 <a href="/suggestions" id="suggestions">Suggest a movie to be added to the website</a>
 {% endif %}
 <!-- Add suggestion ends here -->
 
+<!-- Admin panel link starts here-->
+{% if session['admin']  %}
+<a href="/admin" id="admin">Add movie</a>
+{% endif %}
+<!-- Admin panel link ends here-->
 
 <!-- Ask user to login to use all app's featues -->
 {% if not session['logged_in'] %}

@@ -128,7 +128,8 @@ button.active {
   display: block;
 }
 /* CSS for the suggestions link */
-#suggestions {
+#suggestions,
+#admin {
   display: block;
   width: fit-content;
   background-color: #0e0e0e;
@@ -139,7 +140,8 @@ button.active {
   border-radius: 5px;
   text-align: center;
 }
-#suggestions:hover {
+#suggestions:hover,
+#admin:hover {
   background-color: #c59b08;
   color: #000000;
 }

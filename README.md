@@ -2,6 +2,15 @@
 
 The Movies Review App is a web application built with Python (Flask), HTML, CSS, and JavaScript. It allows users to browse movies, add reviews and ratings, add movies to their watchlist, and suggest movies to be added to the website.
 
+# Admin Feature: Add Movies
+
+The Movies Review App includes an admin feature that allows authorized users to add movies to the website. To access this feature, follow these steps:
+
+- Open the Movies Review App in your web browser.
+- Log in using the admin account credentials.
+  - Email: admin@gmail.com
+  - Password: 123456
+
 ## Installation
 
 To run the Movies Review App on your local machine, follow these steps:

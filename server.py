@@ -1,11 +1,17 @@
-from flask import Flask
+from flask import Flask, abort
+import os
 from database import configure_database,mysql
 from flask import render_template, url_for, request, redirect, flash, session
 from logic import append_suggestion,get_suggestions
 from models.user import User
 from werkzeug.security import generate_password_hash
+from werkzeug.utils import secure_filename
 import math
 app = Flask(__name__)
+
+# Define the folder to store the uploaded images
+UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'images')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 app.config['SECRET_KEY'] = 'your-secret-key' 
 configure_database(app)
@@ -87,7 +93,8 @@ def login():
             session['logged_in'] = True
             session['username'] = user.username
             session['id'] = user.id
-
+            if user.isAdmin:
+                session['admin'] = True
             return redirect(url_for("index"))
         else:
             flash('Username or Password Incorrect', "message")
@@ -138,6 +145,7 @@ def register():
 @app.route('/logout/')
 def logout():
     session['logged_in'] = False
+    session['admin'] = False
     return redirect(url_for('login'))
 
 # Route for the watch-list page
@@ -240,7 +248,48 @@ def suggestions_search():
         append_suggestion(suggested)
         flash("Your suggestion added successfully, Thank you ")
         return redirect(request.referrer)
-    
+
+# Route for admin panel (adding-movie)     
+@app.route("/admin")
+def admin_panel():
+    if session.get('admin') != None and session.get('admin') != False:
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM categories")
+        categories = cur.fetchall()
+        cur.close()
+        return render_template("add-movie.html",categories=categories)
+    else:
+        abort(403, "Access to this resource is forbidden")
+
+# Route for saving movie to DB 
+@app.route("/movies/add", methods=['POST'])
+def add_movie():
+        try:
+            # save image in images folder and get image path
+            if 'image' in request.files:
+                image = request.files['image']
+                if image.filename != '':
+                    filename = secure_filename(image.filename)
+                    image.save(os.path.join(app.config['UPLOAD_FOLDER'], image.filename))
+                    image_path = os.path.join('images', filename).split("\\")[1]
+            
+            # get form data 
+            movie_name = request.form['name']
+            movie_category = request.form['category_id']
+            movie_date = request.form['release_date']
+            movie_image = image_path
+            
+            #insert movie into DB
+            cur = mysql.connection.cursor()
+            cur.execute ("INSERT INTO movies (name, release_date, category_id, image_path) VALUES (%s, %s, %s, %s)", (movie_name, movie_date, movie_category, movie_image))
+            mysql.connection.commit()
+            cur.close()
+            
+            flash('Movie added successfully to the website', "message")
+            return redirect(url_for('index'))
+        except:
+            flash('Error happened, Try to add the movie again', "message")
+            return redirect(request.referrer)
 
 
 
