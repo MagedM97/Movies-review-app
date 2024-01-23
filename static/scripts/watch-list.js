@@ -1,3 +1,12 @@
+// check if watch-list is empty or not
+function checkMovieList() {
+  if (document.getElementById("movie-list").innerHTML == "") {
+    document.getElementById("movies-to-watch").innerText =
+      "No Movies selected yet";
+  }
+}
+
+// get watchlist
 document.addEventListener("DOMContentLoaded", function () {
   const id = document.getElementById("id-user").innerText;
   let movies = localStorage.getItem(id);
@@ -20,6 +29,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         localStorage.setItem(id, JSON.stringify(movies));
         movieList.removeChild(listItem);
+        // show "No movies selected" message if the user deleted all movies from watch list
+        checkMovieList();
       });
       // Append delete button to list item
       listItem.appendChild(deleteButton);
@@ -27,8 +38,5 @@ document.addEventListener("DOMContentLoaded", function () {
       movieList.appendChild(listItem);
     });
   }
-  if (document.getElementById("movie-list").innerHTML == "") {
-    document.getElementById("movies-to-watch").innerText =
-      "No Movies selected yet";
-  }
+  checkMovieList();
 });
