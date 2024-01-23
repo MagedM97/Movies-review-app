@@ -31,34 +31,33 @@ def index():
     # Retrieving movies according to query params
     if category:
         # Retrieve movies based on the specified category
-        cur.execute("SELECT movies.*, categories.name, AVG(ratings.rating) FROM movies JOIN categories ON movies.category_id = categories.id LEFT JOIN ratings ON movies.id = ratings.movie_id WHERE categories.name = %s GROUP BY movies.id", (category,))
+        cur.execute("SELECT movies.*, categories.name, AVG(ratings.rating),YEAR(movies.release_date) FROM movies JOIN categories ON movies.category_id = categories.id LEFT JOIN ratings ON movies.id = ratings.movie_id WHERE categories.name = %s GROUP BY movies.id", (category,))
         movies = cur.fetchall()
     elif date:
         # Retrieve movies based on the latest release date
-        cur.execute("SELECT movies.*, categories.name, AVG(ratings.rating) FROM movies JOIN categories ON movies.category_id = categories.id LEFT JOIN ratings ON movies.id = ratings.movie_id WHERE movies.release_date >= '2023-01-01'  GROUP BY movies.id")
+        cur.execute("SELECT movies.*, categories.name, AVG(ratings.rating),YEAR(movies.release_date) FROM movies JOIN categories ON movies.category_id = categories.id LEFT JOIN ratings ON movies.id = ratings.movie_id WHERE movies.release_date >= '2023-01-01'  GROUP BY movies.id")
         movies = cur.fetchall()
     elif year and name:
         # Retrieve movies based on the specified year and movie name
-        cur.execute("SELECT movies.*, categories.name, AVG(ratings.rating) FROM movies JOIN categories ON movies.category_id = categories.id LEFT JOIN ratings ON movies.id = ratings.movie_id WHERE YEAR(movies.release_date) = %s AND movies.name LIKE %s  GROUP BY movies.id",(year,'%' + name +'%'))
+        cur.execute("SELECT movies.*, categories.name, AVG(ratings.rating),YEAR(movies.release_date) FROM movies JOIN categories ON movies.category_id = categories.id LEFT JOIN ratings ON movies.id = ratings.movie_id WHERE YEAR(movies.release_date) = %s AND movies.name LIKE %s  GROUP BY movies.id",(year,'%' + name +'%'))
         movies = cur.fetchall()
     elif name:
         # Retrieve movies based on the specified movie name
-        cur.execute("SELECT movies.*, categories.name, AVG(ratings.rating) FROM movies JOIN categories ON movies.category_id = categories.id LEFT JOIN ratings ON movies.id = ratings.movie_id WHERE movies.name LIKE %s  GROUP BY movies.id",('%' + name +'%',))
+        cur.execute("SELECT movies.*, categories.name, AVG(ratings.rating),YEAR(movies.release_date) FROM movies JOIN categories ON movies.category_id = categories.id LEFT JOIN ratings ON movies.id = ratings.movie_id WHERE movies.name LIKE %s  GROUP BY movies.id",('%' + name +'%',))
         movies = cur.fetchall()
     elif year:
         # Retrieve movies based on the specified year
-        cur.execute("SELECT movies.*, categories.name, AVG(ratings.rating) FROM movies JOIN categories ON movies.category_id = categories.id LEFT JOIN ratings ON movies.id = ratings.movie_id WHERE  YEAR(movies.release_date) = %s GROUP BY movies.id",(year,))
+        cur.execute("SELECT movies.*, categories.name, AVG(ratings.rating),YEAR(movies.release_date) FROM movies JOIN categories ON movies.category_id = categories.id LEFT JOIN ratings ON movies.id = ratings.movie_id WHERE  YEAR(movies.release_date) = %s GROUP BY movies.id",(year,))
         movies = cur.fetchall()
     else:
         # Retrieve all movies
-        cur.execute("SELECT movies.*, categories.name, AVG(ratings.rating) FROM movies JOIN categories ON movies.category_id = categories.id LEFT JOIN ratings ON movies.id = ratings.movie_id GROUP BY movies.id")
+        cur.execute("SELECT movies.*, categories.name, AVG(ratings.rating),YEAR(movies.release_date) FROM movies JOIN categories ON movies.category_id = categories.id LEFT JOIN ratings ON movies.id = ratings.movie_id GROUP BY movies.id")
         movies = cur.fetchall()
 
     # Retrieve all categories
     cur.execute("SELECT * FROM categories")
     categories = cur.fetchall()
     cur.close()
-
     # Get total pages depending on number of movies
     total_pages = math.ceil((len(movies) / per_page))
     # Specify movies for page

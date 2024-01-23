@@ -206,7 +206,8 @@ button.active {
 
 .movie-card p {
   margin-bottom: 20px;
-  color: #5c1919;
+  color: #821919;
+  font-family: fantasy;
 }
 
 .movie-card a,
