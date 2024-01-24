@@ -106,12 +106,13 @@ a {
   left: 8%;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .login-container,
   .register-container {
-    top: 30%;
+    top: 35%;
     padding: 50px;
     width: 30%;
+    margin: auto;
   }
   h1 {
     color: white;

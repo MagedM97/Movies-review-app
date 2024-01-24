@@ -496,3 +496,14 @@ button.active {
   border-radius: 5px;
   font-style: italic;
 }
+
+@media (max-width: 768px) {
+  .popupContainer {
+    top: 35%;
+    background-color: rgba(255, 253, 253, 0);
+  }
+
+  .popupContent .fieldset {
+    padding: 5px;
+  }
+}
