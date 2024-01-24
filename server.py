@@ -234,12 +234,17 @@ def suggest():
 
 
 # Route for adding suggestions
-@app.route("/suggest-add")
-def suggestions_search():
-    suggested = request.args.get("suggested")
+@app.route("/suggest-add",methods=["GET","POST"])
+def add_suggestion():
+    suggested = request.form["suggested"]
     suggested_movies = get_suggestions()
     if suggested:
-
+    
+        # check if field is empty
+        if not suggested.strip():
+            flash("The field was empty, Try again", "message")
+            return redirect(request.referrer)
+        
         # Check if suggested movie already exists on the website
         cur = mysql.connection.cursor()
         cur.execute("SELECT name FROM movies WHERE movies.name =%s ",(suggested,))
