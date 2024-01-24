@@ -120,10 +120,10 @@ a {
   .logo {
     width: 300px;
     height: 300px;
-    bottom: auto;
+    bottom: 0%;
     top: auto;
     margin-bottom: 20px;
-    left: 20px;
+    left: auto;
     right: auto;
     transform: translateX(0);
   }

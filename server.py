@@ -170,6 +170,7 @@ def rate():
             if old:
                flash("Your Already added you rate For this Movie", "message")
                return redirect(request.referrer) 
+            
              # Add user's rating  
             cur.execute("INSERT INTO ratings (movie_id, user_id, rating) VALUES (%s, %s, %s)", (movie_id, session["id"], rate))
             mysql.connection.commit()
@@ -196,8 +197,13 @@ def review():
             if old:
                flash("Your Already added you review", "message")
                return redirect(url_for("index")) 
-
-             # Add user's review  
+            
+            # Check if user entered empty field
+            if not review.strip():
+                flash("The review was empty, Try again", "message")
+                return redirect(request.referrer)    
+            
+            # Add user's review  
             cur.execute("INSERT INTO reviews (movie_id, user_id, review_text) VALUES (%s, %s, %s)", (movie_id, session["id"], review))
             mysql.connection.commit()
             cur.close()
@@ -233,6 +239,7 @@ def suggestions_search():
     suggested = request.args.get("suggested")
     suggested_movies = get_suggestions()
     if suggested:
+
         # Check if suggested movie already exists on the website
         cur = mysql.connection.cursor()
         cur.execute("SELECT name FROM movies WHERE movies.name =%s ",(suggested,))
@@ -241,6 +248,7 @@ def suggestions_search():
             flash("This Movie already exist in the website", "message")
             return redirect(request.referrer)
         for movie in suggested_movies:
+
             # Check if the suggested movie has been previously suggested
             if suggested.lower() == movie.lower() :
                 flash("This Movie alrady suggested by other user, Thank you ")
