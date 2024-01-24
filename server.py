@@ -66,6 +66,8 @@ def index():
     cur.close()
     # Get total pages depending on number of movies
     total_pages = math.ceil((len(movies) / per_page))
+    if total_pages == 0:
+        total_pages = 1
     # Specify movies for page
     movies_on_page = movies[start:end]
     # Add active class to the navigation based on the query parameters
