@@ -1,5 +1,5 @@
 from database import mysql
-from werkzeug.security import check_password_hash
+from werkzeug.security import check_password_hash,generate_password_hash
 
 # User class for handling user authentication
 class User:
@@ -20,3 +20,16 @@ class User:
             return User(user_data[0], user_data[1], user_data[2], user_data[4])
         else:
             return None
+    
+    @staticmethod
+    def register(username, email, password):
+        cur = mysql.connection.cursor()   
+        cur.execute("SELECT * FROM users WHERE email = %s", (email,))
+        user = cur.fetchone()
+        if user:
+            return False, "Email already exists. Please use a different email."    
+        password_hash = generate_password_hash(password)
+        cur.execute("INSERT INTO users (username, password, email) VALUES (%s, %s, %s)", (username, password_hash, email))
+        mysql.connection.commit()    
+        cur.close()
+        return True, "Successful Registration"

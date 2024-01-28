@@ -116,26 +116,14 @@ def register():
             if not username or not password or not email:
                 flash("Please fill in all the fields", "message")
                 return redirect(url_for("register"))
-
-            cur = mysql.connection.cursor()
-
-            # Check if the email already exists in the database
-            cur.execute("SELECT * FROM users WHERE email = %s", (email,))
-            user = cur.fetchone()
-            if user:
-                flash("Email already exists. Please use a different email.", "message")
+            # Call the static method to allow user to register
+            success, message = User.register(username, email, password)
+            if success:
+                flash(message, "message")
+                return redirect(url_for("login"))
+            else:
+                flash(message, "message")
                 return redirect(url_for("register"))
-
-            # Execute query to insert user into the database
-            password_hash = generate_password_hash(password)
-            cur.execute("INSERT INTO users (username, password, email) VALUES (%s, %s, %s)", (username, password_hash, email))
-            mysql.connection.commit()
-
-            
-            cur.close()
-
-            flash("Successful Registration", "message")
-            return redirect(url_for("login"))
 
         except:
             flash("An error occurred. Please try again.", "message")
